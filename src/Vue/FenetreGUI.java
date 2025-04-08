@@ -58,6 +58,10 @@ public class FenetreGUI extends JFrame {
             for(int col = 0; col < Plateau.NB_Colonnes; col++){
                 cellulesGrille[ligne][col] = new JLabel();
                 cellulesGrille[ligne][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                cellulesGrille[ligne][col].setOpaque(true);
+                /* Apparemment, pour changer la couleur pour JLabel, il faut rendre le background opaque (il ne l'est pas par défaut).
+                Merci à ce forum : https://stackoverflow.com/questions/2380314/how-do-i-set-a-jlabels-background-color/2380328 */
+                cellulesGrille[ligne][col].setBackground(Color.BLUE);
                 panelGrille.add(cellulesGrille[ligne][col]);
             }
         }
