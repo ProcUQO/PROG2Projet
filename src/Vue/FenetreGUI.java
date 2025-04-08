@@ -18,6 +18,7 @@ public class FenetreGUI extends JFrame {
     private JPanel panelGrille;
     private JPanel panelBoutons;
     private JLabel[][] cellulesGrille; // Inspiré de cette vidéo : https://www.youtube.com/watch?v=impJtkTcQ94
+    private Connect4Controller controller; // Pour la partie controller, avec l'ajout de jeton au visuel
 
     // Constructeur
     public FenetreGUI(){
@@ -84,23 +85,31 @@ public class FenetreGUI extends JFrame {
 
     public void mettreAJourGrille(Plateau plateau) {
         // Logique similaire au loop précédent mais pour ajouter les icônes, faire tomber le jeton
+        // Temporaire, vu que j'utilise juste les jetons rouge en ce moment, déso William
+        // Il faut retraverser le tableau pour voir quelle case est occupée
         for(int ligne = 0; ligne < Plateau.NB_Lignes; ligne++){
             for(int col = 0; col < Plateau.NB_Colonnes; col++){
-                cellulesGrille[ligne][col].setBackground(Color.RED);
+
+                if(plateau.getJeton(col, ligne) != null){
+                    cellulesGrille[Plateau.NB_Lignes - ligne - 1][col].setBackground(Color.RED);
+                } else {
+                    cellulesGrille[Plateau.NB_Lignes - ligne - 1][col].setBackground(Color.BLUE);
+                }
             }
-        }    }
+        }
+    }
 
-    public void lierControlleur(Connect4Controller connect4Controller) {
+    public void lierControlleur(Connect4Controller controller) {
         // Beeeennn des listener, vu qu'il y en a plusieurs
+        this.controller = controller;
 
-        boutonAjouterColonne1.addActionListener(e -> connect4Controller.ajoutJetonColonne(0));
-        boutonAjouterColonne2.addActionListener(e -> connect4Controller.ajoutJetonColonne(1));
-
-        boutonAjouterColonne3.addActionListener(e -> connect4Controller.ajoutJetonColonne(2));
-        boutonAjouterColonne4.addActionListener(e -> connect4Controller.ajoutJetonColonne(3));
-        boutonAjouterColonne5.addActionListener(e -> connect4Controller.ajoutJetonColonne(4));
-        boutonAjouterColonne6.addActionListener(e -> connect4Controller.ajoutJetonColonne(5));
-        boutonAjouterColonne7.addActionListener(e -> connect4Controller.ajoutJetonColonne(6));
+        boutonAjouterColonne1.addActionListener(e -> controller.ajoutJetonColonne(0));
+        boutonAjouterColonne2.addActionListener(e -> controller.ajoutJetonColonne(1));
+        boutonAjouterColonne3.addActionListener(e -> controller.ajoutJetonColonne(2));
+        boutonAjouterColonne4.addActionListener(e -> controller.ajoutJetonColonne(3));
+        boutonAjouterColonne5.addActionListener(e -> controller.ajoutJetonColonne(4));
+        boutonAjouterColonne6.addActionListener(e -> controller.ajoutJetonColonne(5));
+        boutonAjouterColonne7.addActionListener(e -> controller.ajoutJetonColonne(6));
 
 
     }

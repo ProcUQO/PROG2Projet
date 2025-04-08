@@ -20,7 +20,12 @@ public class Plateau {
                 colonnes[colonne][ligne] = jeton; // on dépose le jeton !
                 return;
             }
-        return; // Quand la colonne est pleine.
+        // return; // Quand la colonne est pleine. // Triple commentaire, en fait c'est pas nécessaire à ajouter.
         }
+    }
+
+    // Va être appelé depuis mettreAJourGrille pour vérifier le contenu de la grille
+    public Jeton getJeton(int colonne, int ligne){
+        return colonnes[colonne][ligne];
     }
 }
