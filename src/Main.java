@@ -10,6 +10,5 @@ public class Main {
         Connect4Controller controller = new Connect4Controller(); // et notre contrôleur, qui devra avoir accès au modèle et à la vue
 
         FenetreGUI FenetreGUI = new FenetreGUI();
-        FenetreGUI.setVisible(true);
     }
 }

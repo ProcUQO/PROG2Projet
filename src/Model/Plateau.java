@@ -2,8 +2,8 @@ package Model;
 
 public class Plateau {
     private Jeton[][] colonnes; // Le jeu est habituellement en format 7 x 6.
-    private final int NB_Lignes = 6;
-    private final int NB_Colonnes = 7;
+    public static final int NB_Lignes = 6;
+    public static final int NB_Colonnes = 7;
 
     // Constructeur
     public Plateau(){
