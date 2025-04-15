@@ -11,7 +11,8 @@ public class Jeton {
         return couleur;
     }
 
-    public void setCouleur(String couleur){
-        this.couleur = couleur;
+    public String setCouleur(String color){
+        couleur = color;
+        return couleur;
     }
 }

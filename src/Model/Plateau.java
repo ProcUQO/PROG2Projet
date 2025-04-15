@@ -28,6 +28,7 @@ public class Plateau {
 
     // Va être appelé depuis mettreAJourGrille pour vérifier le contenu de la grille
     public Jeton getJeton(int colonne, int ligne){
+
         return colonnes[colonne][ligne];
     }
 

@@ -3,7 +3,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import TurnBased.Turn;
+import TurnBased.Tableau;
 import Controller.Connect4Controller;
 import Model.Plateau;
 
@@ -19,6 +22,9 @@ public class FenetreGUI extends JFrame {
     private JPanel panelBoutons;
     private JLabel[][] cellulesGrille; // Inspiré de cette vidéo : https://www.youtube.com/watch?v=impJtkTcQ94
     private Connect4Controller controller; // Pour la partie controller, avec l'ajout de jeton au visuel
+    Turn tour = new Turn();
+    Tableau tableau = new Tableau();
+    private int ligne;
 
     // Constructeur
     public FenetreGUI(){
@@ -64,7 +70,7 @@ public class FenetreGUI extends JFrame {
                 cellulesGrille[ligne][col].setOpaque(true);
                 /* Apparemment, pour changer la couleur pour JLabel, il faut rendre le background opaque (il ne l'est pas par défaut).
                 Merci à ce forum : https://stackoverflow.com/questions/2380314/how-do-i-set-a-jlabels-background-color/2380328 */
-                cellulesGrille[ligne][col].setBackground(Color.BLUE);
+                cellulesGrille[ligne][col].setBackground(Color.WHITE);
                 panelGrille.add(cellulesGrille[ligne][col]);
             }
         }
@@ -73,27 +79,94 @@ public class FenetreGUI extends JFrame {
 
         setVisible(true);
 
-        // Ajout des écouteurs d'événements
-        /*
+        //------------// Ajout des écouteurs d'événements //------------//
+
         boutonAjouterColonne1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ...();
+                ligne = tableau.TabAddColor(0, tour.tourJoueur1);
+                //tableau.SetTableau();
+                mettreAJourGrille();
+                tableau.VerifierVictoire(0, ligne, tour.tourJoueur1);
+                tour.ChangeTurn();
             }
-        }); */
+        });
+        boutonAjouterColonne2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ligne = tableau.TabAddColor(1, tour.tourJoueur1);
+                //tableau.SetTableau();
+                mettreAJourGrille();
+                tableau.VerifierVictoire(1, ligne, tour.tourJoueur1);
+                tour.ChangeTurn();
+            }
+        });
+        boutonAjouterColonne3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ligne = tableau.TabAddColor(2, tour.tourJoueur1);
+                //tableau.SetTableau();
+                mettreAJourGrille();
+                tableau.VerifierVictoire(2, ligne, tour.tourJoueur1);
+                tour.ChangeTurn();
+            }
+        });
+        boutonAjouterColonne4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ligne = tableau.TabAddColor(3, tour.tourJoueur1);
+                //tableau.SetTableau();
+                mettreAJourGrille();
+                tableau.VerifierVictoire(3, ligne, tour.tourJoueur1);
+                tour.ChangeTurn();
+            }
+        });
+        boutonAjouterColonne5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ligne = tableau.TabAddColor(4, tour.tourJoueur1);
+                //tableau.SetTableau();
+                mettreAJourGrille();
+                tableau.VerifierVictoire(4, ligne, tour.tourJoueur1);
+                tour.ChangeTurn();
+            }
+        });
+        boutonAjouterColonne6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ligne = tableau.TabAddColor(5, tour.tourJoueur1);
+                //tableau.SetTableau();
+                mettreAJourGrille();
+                tableau.VerifierVictoire(5, ligne, tour.tourJoueur1);
+                tour.ChangeTurn();
+            }
+        });
+        boutonAjouterColonne7.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ligne = tableau.TabAddColor(6, tour.tourJoueur1);
+                //tableau.SetTableau();
+                mettreAJourGrille();
+                tableau.VerifierVictoire(6, ligne, tour.tourJoueur1);
+                tour.ChangeTurn();
+            }
+        });
+
+        //------------------------------------------------------------//
     }
 
-    public void mettreAJourGrille(Plateau plateau) {
+    public void mettreAJourGrille() {
         // Logique similaire au loop précédent mais pour ajouter les icônes, faire tomber le jeton
         // Temporaire, vu que j'utilise juste les jetons rouge en ce moment, déso William
         // Il faut retraverser le tableau pour voir quelle case est occupée
-        for(int ligne = 0; ligne < Plateau.NB_Lignes; ligne++){
-            for(int col = 0; col < Plateau.NB_Colonnes; col++){
-
-                if(plateau.getJeton(col, ligne) != null){
-                    cellulesGrille[Plateau.NB_Lignes - ligne - 1][col].setBackground(Color.RED);
-                } else {
-                    cellulesGrille[Plateau.NB_Lignes - ligne - 1][col].setBackground(Color.BLUE);
+        for(int i = 0; i < tableau.horizontal; i++){
+            for(int j = tableau.vertical - 1; j > -1; j --){
+                if(tableau.tab[i][j] != null) {
+                    if(tableau.tab[i][j] == "Jaune")
+                        cellulesGrille[j][i].setBackground(Color.YELLOW);
+                    if(tableau.tab[i][j] == "Rouge"){
+                        cellulesGrille[j][i].setBackground(Color.RED);
+                    }
                 }
             }
         }
