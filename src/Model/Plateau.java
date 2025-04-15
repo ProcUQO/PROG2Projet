@@ -34,6 +34,7 @@ public class Plateau {
     // Fonction de détection, inspiré de ce forum : https://stackoverflow.com/questions/32770321/connect-4-check-for-a-win-algorithm
     // Utilise la ligne et la colonne du jeton qui vient d'être droppé
     public boolean verifierVictoire(int colonne, int ligneDuDernierJeton) { // nom un peu long, mais derniereLigne ou dernierJeton porte un peu à confusion
+
         // On va prendre la couleur, pour ne pas faire n'importe quoi
         String couleur = colonnes[colonne][ligneDuDernierJeton].getCouleur();
 
@@ -96,4 +97,17 @@ public class Plateau {
 
         return compteur >= 4;
     }
+
+    public boolean estPlein() {
+        // On regarde TOUTES les colonnes et lignes pour voir si un emplacement est vide
+        for(int colonne = 0; colonne < NB_Colonnes; colonne++){
+            for(int ligne=0; ligne < NB_Lignes; ligne++){
+                if(colonnes[colonne][ligne] == null)
+                    // Si on le trouve, c'est pas plein.
+                    return false;
+            }
+        }
+        return true; // Si ça se rend ici, c'est parce qu'on a trouvé aucun emplacement vide.
+    }
+
 }

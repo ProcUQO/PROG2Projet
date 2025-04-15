@@ -37,6 +37,12 @@ public class Connect4Controller {
                 resetJeu();
             }
 
+            // Quand le tableau est plein, c'est égalité, on recommence.
+            if(plateau.estPlein()){
+                JOptionPane.showMessageDialog(fenetre, "Égalité! On recommence.");
+                resetJeu();
+            }
+
             // et on change le tour :)
             tourDuJoueurRouge = !tourDuJoueurRouge;
         }
