@@ -9,13 +9,7 @@ import Model.Jeton;
 import Model.Plateau;
 
 public class FenetreGUI extends JFrame {
-    private final JButton boutonAjouterColonne1;
-    private final JButton boutonAjouterColonne2;
-    private final JButton boutonAjouterColonne3;
-    private final JButton boutonAjouterColonne4;
-    private final JButton boutonAjouterColonne5;
-    private final JButton boutonAjouterColonne6;
-    private final JButton boutonAjouterColonne7;
+    private JButton[] boutonsAjouterColonne;
     private JPanel panelGrille;
     private JPanel panelBoutons;
     private JLabel[][] cellulesGrille; // Inspiré de cette vidéo : https://www.youtube.com/watch?v=impJtkTcQ94
@@ -32,23 +26,13 @@ public class FenetreGUI extends JFrame {
         // Le choix de borderlayout est inspiré de https://www.youtube.com/watch?v=1G4lBJW1vfM. On peut facilement assigner des directions.
 
         // On fait un panneau séparé pour les boutons, c'est plus facile de les réorganiser comme ça.
-        JPanel panelBoutons = new JPanel(new GridLayout(1, 7)); // 1,7 car les boutons sont tous sur la même ligne
-        boutonAjouterColonne1 = new JButton("1");
-        boutonAjouterColonne2 = new JButton("2");
-        boutonAjouterColonne3 = new JButton("3");
-        boutonAjouterColonne4 = new JButton("4");
-        boutonAjouterColonne5 = new JButton("5");
-        boutonAjouterColonne6 = new JButton("6");
-        boutonAjouterColonne7 = new JButton("7");
+        JPanel panelBoutons = new JPanel(new GridLayout(1, Plateau.NB_Colonnes)); // 1,7 car les boutons sont tous sur la même ligne
+        boutonsAjouterColonne = new JButton[Plateau.NB_Colonnes];
+        for(int i = 0; i < Plateau.NB_Colonnes; i++){
+            boutonsAjouterColonne[i] = new JButton(String.valueOf(i + 1));
+            panelBoutons.add(boutonsAjouterColonne[i]);  // Ajout des composants à la fenêtre, parce que c'dest bien initialiser mais ce n'est pas suffisant (notion du visuel, interaction, etc..)
 
-        // Ajout des composants à la fenêtre, parce que c'dest bien initialiser mais ce n'est pas suffisant (notion du visuel, interaction, etc..)
-        panelBoutons.add(boutonAjouterColonne1);
-        panelBoutons.add(boutonAjouterColonne2);
-        panelBoutons.add(boutonAjouterColonne3);
-        panelBoutons.add(boutonAjouterColonne4);
-        panelBoutons.add(boutonAjouterColonne5);
-        panelBoutons.add(boutonAjouterColonne6);
-        panelBoutons.add(boutonAjouterColonne7);
+        }
 
         // l'ajout final
         add(panelBoutons, BorderLayout.NORTH);
@@ -97,17 +81,12 @@ public class FenetreGUI extends JFrame {
     }
 
     public void lierControlleur(Connect4Controller controller) {
-        // Beeeennn des listener, vu qu'il y en a plusieurs
+        // On traverse des listener, vu qu'il y en a plusieurs
         this.controller = controller;
 
-        boutonAjouterColonne1.addActionListener(e -> controller.ajoutJetonColonne(0));
-        boutonAjouterColonne2.addActionListener(e -> controller.ajoutJetonColonne(1));
-        boutonAjouterColonne3.addActionListener(e -> controller.ajoutJetonColonne(2));
-        boutonAjouterColonne4.addActionListener(e -> controller.ajoutJetonColonne(3));
-        boutonAjouterColonne5.addActionListener(e -> controller.ajoutJetonColonne(4));
-        boutonAjouterColonne6.addActionListener(e -> controller.ajoutJetonColonne(5));
-        boutonAjouterColonne7.addActionListener(e -> controller.ajoutJetonColonne(6));
-
-
+        for (int i = 0; i < boutonsAjouterColonne.length; i++) {
+            int colonne = i;
+            boutonsAjouterColonne[i].addActionListener(e -> controller.ajoutJetonColonne(colonne));
+        }
     }
 }
