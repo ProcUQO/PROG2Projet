@@ -3,8 +3,8 @@ package Model;
 public class Plateau {
     public static final int MOUVEMENT_INVALIDE = -1; // Simplement une valeur qui sera toujours refusée. Pour la lisibilité.
     private Jeton[][] colonnes; // Le jeu est habituellement en format 7 x 6.
-    public static final int NB_Lignes = 6;
-    public static final int NB_Colonnes = 7;
+    public static int NB_Lignes = 6;
+    public static int NB_Colonnes = 7;
 
     // Constructeur
     public Plateau(){
@@ -33,7 +33,7 @@ public class Plateau {
 
     // Fonction de détection, inspiré de ce forum : https://stackoverflow.com/questions/32770321/connect-4-check-for-a-win-algorithm
     // Utilise la ligne et la colonne du jeton qui vient d'être droppé
-    public boolean verifierVictoire(int colonne, int ligneDuDernierJeton) { // nom un peu long, mais derniereLigne ou dernierJeton porte un peu à confusion
+    public boolean verifierVictoire(int colonne, int ligneDuDernierJeton) { // le nom ligneDuDernierJeton est un peu long, mais derniereLigne ou dernierJeton porte un peu à confusion
 
         // On va prendre la couleur, pour ne pas faire n'importe quoi
         String couleur = colonnes[colonne][ligneDuDernierJeton].getCouleur();
